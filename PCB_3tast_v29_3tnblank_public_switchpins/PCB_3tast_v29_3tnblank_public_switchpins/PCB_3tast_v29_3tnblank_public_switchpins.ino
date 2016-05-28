@@ -72,13 +72,13 @@
 // INITIALIZE PINS
 // ---------------
 // electrical lick sensor pin
-int elick_pin=A5;
+int elick_pin=A0;
 
 // pin to sense battery power
 int batt_check_pin=A1;
 
 // analog signal that indicats which trial type to run when a mouse initiates a trial
-int trial_type_pin=A0;    
+int trial_type_pin=A5;    
 
 // unused pin for reading to reduce digital noise on last read pin
 int dummy_pin = A4;       
@@ -105,8 +105,8 @@ int button_pin=17;  //This is A3 -- Analog pin being used as digital input,
 // pin to report difficulty (licks skipped before next tastant delivery)
 // this pin also conveys specific timing information per trial (trial start, and length of learning period on active trials)
 int countlick_pin = 8;
-int speak_pin = 2; // tone A pin, tone plays if pin is high
-int speak_pin_2 = 7; // tone B pin, tone plays if pin is high
+int speak_pin = 7; // tone A pin, tone plays if pin is high (originally 2 for pcb board v1)
+int speak_pin_2 = 2; // tone B pin, tone plays if pin is high (originally 7 for pcb board v1)
                      // Tone C is both tones simultaneously
 
 
@@ -115,7 +115,7 @@ int speak_pin_2 = 7; // tone B pin, tone plays if pin is high
 // --------
 // threshold of voltage change to detect a lick, 
 // if your rig is noisy, may need to change to be higher, or use pure threshold not difference threshold
-int elick_diff_thresh = 40; 
+int elick_diff_thresh = 30; 
 float rewardsize = 25; // time valve open for each reward in ms, on my rig this give about a 1 microliter delivery
 
 // vaccuum and rinse control timing, not currently used, but there are functions here that can be used to rinse if you need it
@@ -879,7 +879,7 @@ void check_button() {
           open_all();
           delay(25);
           close_all();
-          delay(100);
+          delay(200);
         } 
         digitalWrite(led_d_pin,LOW);
         calibrate=0;
